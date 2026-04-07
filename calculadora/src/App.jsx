@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 
 const styles = `
@@ -214,10 +215,10 @@ function fmt(val) {
 
 // ── Calculadora principal ──────────────────────────────────────────────────
 export default function Calculator() {
-  const [current,     setCurrent]     = useState("0");
-  const [prev,        setPrev]        = useState(null);
-  const [operator,    setOperator]    = useState(null);
-  const [history,     setHistory]     = useState("");
+  const [current, setCurrent] = useState("0");
+  const [prev, setPrev] = useState(null);
+  const [operator, setOperator] = useState(null);
+  const [history, setHistory] = useState("");
   const [waitingNext, setWaitingNext] = useState(false);
 
   function handleDigit(d) {
@@ -246,17 +247,17 @@ export default function Calculator() {
     setCurrent(r); setPrev(null); setOperator(null); setWaitingNext(true);
   }
 
-  function handleClear()   { setCurrent("0"); setPrev(null); setOperator(null); setHistory(""); setWaitingNext(false); }
-  function handleSign()    { if (current !== "0" && current !== "Error") setCurrent(String(parseFloat(current) * -1)); }
+  function handleClear() { setCurrent("0"); setPrev(null); setOperator(null); setHistory(""); setWaitingNext(false); }
+  function handleSign() { if (current !== "0" && current !== "Error") setCurrent(String(parseFloat(current) * -1)); }
   function handlePercent() { if (current !== "Error") setCurrent(String(parseFloat(current) / 100)); }
 
   function handleButton(label) {
     if ("0123456789.".includes(label)) return handleDigit(label);
-    if (OPERATORS.includes(label))     return handleOperator(label);
-    if (label === "=")   return handleEquals();
-    if (label === "AC")  return handleClear();
+    if (OPERATORS.includes(label)) return handleOperator(label);
+    if (label === "=") return handleEquals();
+    if (label === "AC") return handleClear();
     if (label === "+/-") return handleSign();
-    if (label === "%")   return handlePercent();
+    if (label === "%") return handlePercent();
   }
 
   const opVar = (op) =>
@@ -270,10 +271,10 @@ export default function Calculator() {
         <div className="card">
           <Display current={current} history={history} />
           <div className="buttons-grid">
-            <Button label="AC"  onClick={handleButton} variant="btn-clear" />
+            <Button label="AC" onClick={handleButton} variant="btn-clear" />
             <Button label="+/-" onClick={handleButton} variant="btn-util" />
-            <Button label="%"   onClick={handleButton} variant="btn-util" />
-            <Button label="÷"   onClick={handleButton} variant={opVar("÷")} />
+            <Button label="%" onClick={handleButton} variant="btn-util" />
+            <Button label="÷" onClick={handleButton} variant={opVar("÷")} />
 
             <Button label="7" onClick={handleButton} />
             <Button label="8" onClick={handleButton} />
